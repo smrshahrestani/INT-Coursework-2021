@@ -3,6 +3,7 @@
     (:requirements :strips)
 
     ;(:domain-variables ) ;deprecated
+    ;hello!
 
     (:predicates
         (some-fact ?a)

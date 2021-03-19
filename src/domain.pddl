@@ -1,23 +1,64 @@
 (define
-    (domain example)
-    (:requirements :strips)
-
-    ;(:domain-variables ) ;deprecated
-    ;hello!
-
-    (:predicates
-        (some-fact ?a)
-        (some-goal ?a)
+    (domain dronedelivery)
+    (:requirements :strips :typing :negative-preconditions)
+    (:types
+        location parcel storm drone ; our types
     )
 
-    (:action DO-STUFF
-        :parameters (?a)
+    (:predicates
+        (drone-at ?a - drone ?b - location) ;the drone is in a location
+        (storm-at ?b - location) ;the storm is in a location
+        (has-parcel ?a - drone)  ; the parcel is with the drone
+        (at ?d - parcel ?b - location) ;the parcel is in a location
+        (on ?d - parcel ?a - drone) ; the parcel is on a drone
+        (can-land ?b - location);the location is clear for landing
+        (drone-is-flying ?a - drone) ;a drone is flying
+
+    )
+    ;move the drone to a new location. right now it can teleport
+    (:action change_location
+        :parameters (?droneinit - drone ?locationinit - location ?locationfinal - location )
         :precondition (and
-            (some-fact ?a)
+            (drone-is-flying ?droneinit)
+            (drone-at ?droneinit ?locationinit)
+            (not (storm-at ?locationfinal))
         )
         :effect (and
-            (some-goal ?a)
+            (drone-at ?droneinit ?locationfinal)
+            (not (drone-at ?droneinit ?locationinit))
         )
-        ; :expansion ;deprecated
+    )
+
+    (:action land_and_pick_up_parcel
+        :parameters (?drone - drone ?p - parcel ?l - location)
+        :precondition (and
+            (drone-at ?drone ?l)
+            (at ?p ?l)
+            (not (has-parcel ?drone))
+            (can-land ?l)
+            (drone-is-flying ?drone)
+        )
+        :effect (and
+            (not (at ?p ?l))
+            (on ?p ?drone)
+            (not (can-land ?l))
+            (has-parcel ?drone)
+            (not (drone-is-flying ?drone))
+        )
+    )
+
+    (:action take_off
+        :parameters (?drone - drone ?l - location)
+        :precondition (and
+            (drone-at ?drone ?l)
+            (has-parcel ?drone)
+            (not (storm-at ?l))
+            (not (drone-is-flying ?drone ))
+        )
+        :effect (and
+            (can-land ?l)
+            (drone-is-flying ?drone)
+
+        )
     )
 )

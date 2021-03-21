@@ -6,6 +6,7 @@
     )
 
     (:predicates
+        ;(drone-at ?a - location)
         (drone-at ?a - drone ?b - location) ;the drone is in a location
         (storm-at ?b - location) ;the storm is in a location
         (has-parcel ?a - drone)  ; the parcel is with the drone
@@ -29,23 +30,48 @@
         )
     )
 
-    (:action land_and_pick_up_parcel
-        :parameters (?drone - drone ?p - parcel ?l - location)
-        :precondition (and
-            (drone-at ?drone ?l)
-            (at ?p ?l)
-            (not (has-parcel ?drone))
+    ; (:action land_and_pick_up_parcel
+    ;     :parameters (?drone - drone ?p - parcel ?l - location)
+    ;     :precondition (and
+    ;         (drone-at ?drone ?l)
+    ;         (at ?p ?l)
+    ;         (not (has-parcel ?drone))
+    ;         (can-land ?l)
+    ;         (drone-is-flying ?drone)
+    ;     )
+    ;     :effect (and
+    ;         (not (at ?p ?l))
+    ;         (on ?p ?drone)
+    ;         (not (can-land ?l))
+    ;         (has-parcel ?drone)
+    ;         (not (drone-is-flying ?drone))
+    ;     )
+    ; )
+
+    (:action land
+        :parameters (?drone - drone ?l - location)
+        :precondition (and 
             (can-land ?l)
             (drone-is-flying ?drone)
+            (drone-at ?drone ?l)
         )
-        :effect (and
-            (not (at ?p ?l))
-            (on ?p ?drone)
-            (not (can-land ?l))
-            (has-parcel ?drone)
-            (not (drone-is-flying ?drone))
-        )
+        :effect (and )
     )
+
+    (:action release
+        :parameters (?drone - drone ?p - parcel)
+        :precondition (and 
+            
+        )
+        :effect (and )
+    )
+
+    (:action pickup
+        :parameters (?drone - drone ?p - parcel)
+        :precondition (and )
+        :effect (and )
+    )
+
 
     (:action take_off
         :parameters (?drone - drone ?l - location)

@@ -10,10 +10,12 @@
         (drone-at ?a - drone ?b - location) ;the drone is in a location
         (storm-at ?b - location) ;the storm is in a location
         (has-parcel ?a - drone)  ; the parcel is with the drone
+        ; (has-no-parcel ?a - drone)
         (at ?d - parcel ?b - location) ;the parcel is in a location
         (on ?d - parcel ?a - drone) ; the parcel is on a drone
         (can-land ?b - location);the location is clear for landing
         (drone-is-flying ?a - drone) ;a drone is flying
+        ; (engine-is-on ?a - drone) ; instead of drone-is-flying
 
     )
     ;move the drone to a new location. right now it can teleport

@@ -9,6 +9,7 @@
         ;(drone-at ?a - location)
         (drone-at ?a - drone ?b - location) ;the drone is in a location
         (storm-at ?b - location) ;the storm is in a location
+        (no-storm-at ?b - location) ;there is no storm in a location
         (has-parcel ?a - drone)  ; the parcel is with the drone
         ; (has-no-parcel ?a - drone)
         (at ?d - parcel ?b - location) ;the parcel is in a location

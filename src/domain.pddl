@@ -76,6 +76,7 @@
         )
     )
 
+    
     (:action pickup
         :parameters (?drone - drone ?p - parcel ?l - location)
         :precondition (and 

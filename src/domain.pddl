@@ -1,6 +1,6 @@
 (define
     (domain dronedelivery)
-    (:requirements :strips :typing :negative-preconditions)
+    (:requirements :strips :typing) ;:negative-preconditions)
     (:types
         location parcel storm drone ; our types
     )
@@ -9,11 +9,14 @@
         ;(drone-at ?a - location)
         (drone-at ?a - drone ?b - location) ;the drone is in a location
         (storm-at ?b - location) ;the storm is in a location
-        (has-parcel ?a - drone)  ; the parcel is with the drone
+        (clear-skies ?b - location) ;no storm is in a location
         (at ?d - parcel ?b - location) ;the parcel is in a location
-        (on ?d - parcel ?a - drone) ; the parcel is on a drone
+        (has-parcel ?d - parcel ?a - drone) ; the parcel is on a drone
         (can-land ?b - location);the location is clear for landing
         (drone-is-flying ?a - drone) ;a drone is flying
+        (drone-landed ?d - drone) ; drone has landed
+        (belongs-to ?p - parcel ?l - location) ;parcel belongs to this address
+        (drone-empty ?d drone) ;drone cargo hold is empty
 
     )
     ;move the drone to a new location. right now it can teleport
@@ -22,31 +25,13 @@
         :precondition (and
             (drone-is-flying ?droneinit)
             (drone-at ?droneinit ?locationinit)
-            (not (storm-at ?locationfinal))
+            (clear-skies ?locationfinal)
         )
         :effect (and
             (drone-at ?droneinit ?locationfinal)
             (not (drone-at ?droneinit ?locationinit))
         )
     )
-
-    ; (:action land_and_pick_up_parcel
-    ;     :parameters (?drone - drone ?p - parcel ?l - location)
-    ;     :precondition (and
-    ;         (drone-at ?drone ?l)
-    ;         (at ?p ?l)
-    ;         (not (has-parcel ?drone))
-    ;         (can-land ?l)
-    ;         (drone-is-flying ?drone)
-    ;     )
-    ;     :effect (and
-    ;         (not (at ?p ?l))
-    ;         (on ?p ?drone)
-    ;         (not (can-land ?l))
-    ;         (has-parcel ?drone)
-    ;         (not (drone-is-flying ?drone))
-    ;     )
-    ; )
 
     (:action land
         :parameters (?drone - drone ?l - location)
@@ -55,21 +40,55 @@
             (drone-is-flying ?drone)
             (drone-at ?drone ?l)
         )
-        :effect (and )
+        :effect (and 
+            not (drone-is-flying ?drone)
+            (drone-landed ?drone)
+        )
     )
 
     (:action release
-        :parameters (?drone - drone ?p - parcel)
+        :parameters (?drone - drone ?p - parcel ?l - location)
         :precondition (and 
-            
+        (drone-at ?drone ?l)
+        (has-parcel ?p ?drone)
+        (drone-landed ?drone)
+        (belongs-to ?p ?l)
         )
-        :effect (and )
+        :effect (and 
+        (at ?p ?l)
+        (not (has-parcel ?p ?drone))
+        (drone-empty ?drone drone)
+        )
+    )
+
+    (:action parachute
+        :parameters (?drone - drone ?p - parcel ?l - location)
+        :precondition (and 
+        (drone-at ?drone ?l)
+        (has-parcel ?p ?drone)
+        (drone-is-flying ?drone)
+        (belongs-to ?p ?l)
+        )
+        :effect (and 
+        (at ?p ?l)
+        (not (has-parcel ?p ?drone))
+        (drone-empty ?drone drone)
+        )
     )
 
     (:action pickup
-        :parameters (?drone - drone ?p - parcel)
-        :precondition (and )
-        :effect (and )
+        :parameters (?drone - drone ?p - parcel ?l - location)
+        :precondition (and 
+        (drone-at ?drone ?l)
+        (drone-landed ?drone)
+        (drone-empty ?drone drone)
+        (at ?p ?l)
+        )
+        :effect (and 
+        (has-parcel ?p ?drone)
+        (not (at ?p ?l))
+        (not (drone-empty ?drone drone))
+        )
     )
 
 
@@ -77,14 +96,11 @@
         :parameters (?drone - drone ?l - location)
         :precondition (and
             (drone-at ?drone ?l)
-            (has-parcel ?drone)
-            (not (storm-at ?l))
-            (not (drone-is-flying ?drone ))
+            (drone-landed ?drone)
         )
         :effect (and
-            (can-land ?l)
             (drone-is-flying ?drone)
-
+            (not (drone-landed ?drone))
         )
     )
 )

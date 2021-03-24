@@ -11,10 +11,10 @@
     (:init
         
         ;
-        (no-storm-at location_a)
-        (no-storm-at location_b)
-        (no-storm-at location_c)
-        (no-storm-at location_d)
+        (clear-skies location_a)
+        (clear-skies location_b)
+        (clear-skies location_c)
+        (clear-skies location_d)
 
 
         (at parcel_a location_a)
@@ -29,10 +29,17 @@
         (drone-at drone_b location_a)
         (drone-at drone_c location_a)
 
-        (pickup drone_a parcel_a)
-        (pickup drone_b parcel_b)
-        (pickup drone_c parcel_c)
+        ; (has-parcel drone_a parcel_a)
+        ; (has-parcel drone_b parcel_b)
+        ; (has-parcel drone_c parcel_c)
         
+        (drone-landed drone_a)
+        (drone-landed drone_b)
+        (drone-landed drone_c)
+
+        (drone-empty drone_a)
+        (drone-empty drone_b)
+        (drone-empty drone_c)
 
 
     )

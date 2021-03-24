@@ -81,13 +81,13 @@
         :precondition (and 
         (drone-at ?drone ?l)
         (drone-landed ?drone)
-        (drone-empty ?drone drone)
+        (drone-empty ?drone)
         (at ?p ?l)
         )
         :effect (and 
         (has-parcel ?p ?drone)
         (not (at ?p ?l))
-        (not (drone-empty ?drone drone))
+        (not (drone-empty ?drone))
         )
     )
 

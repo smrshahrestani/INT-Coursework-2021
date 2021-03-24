@@ -16,7 +16,7 @@
         (drone-is-flying ?a - drone) ;a drone is flying
         (drone-landed ?d - drone) ; drone has landed
         (belongs-to ?p - parcel ?l - location) ;parcel belongs to this address
-        (drone-empty ?d drone) ;drone cargo hold is empty
+        (drone-empty ?d - drone) ;drone cargo hold is empty
 
     )
     ;move the drone to a new location. right now it can teleport
@@ -41,7 +41,7 @@
             (drone-at ?drone ?l)
         )
         :effect (and 
-            not (drone-is-flying ?drone)
+            (not (drone-is-flying ?drone))
             (drone-landed ?drone)
         )
     )
@@ -57,7 +57,7 @@
         :effect (and 
         (at ?p ?l)
         (not (has-parcel ?p ?drone))
-        (drone-empty ?drone drone)
+        (drone-empty ?drone)
         )
     )
 

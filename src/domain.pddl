@@ -72,7 +72,7 @@
         :effect (and 
         (at ?p ?l)
         (not (has-parcel ?p ?drone))
-        (drone-empty ?drone drone)
+        (drone-empty ?drone)
         )
     )
 

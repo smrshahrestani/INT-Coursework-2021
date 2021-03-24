@@ -21,6 +21,11 @@
         (at parcel_b location_a)
         (at parcel_c location_a)
         
+        (belongs-to parcel_a location_b)
+        (belongs-to parcel_b location_c)
+        (belongs-to parcel_c location_d)
+
+
         ; (on parcel_a drone_a)
         ; (on parcel_b drone_b)
         ; (on parcel_c drone_c)

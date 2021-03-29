@@ -1,8 +1,15 @@
 (define
     (domain dronedelivery)
-    (:requirements :strips :typing) ;:negative-preconditions)
+    (:requirements :strips :typing :fluents) ;:negative-preconditions)
     (:types
         location parcel storm drone ; our types
+    )
+    
+    ;fluents
+    (:functions
+        (battery-level ?b - drone)
+        (distance-between ?l1 - location ?l2 - location)
+        
     )
 
     (:predicates
@@ -30,6 +37,7 @@
         :effect (and
             (drone-at ?droneinit ?locationfinal)
             (not (drone-at ?droneinit ?locationinit))
+            (decrease (battery-level ?droneinit) 1)
         )
     )
 
@@ -43,6 +51,8 @@
         :effect (and 
             (not (drone-is-flying ?drone))
             (drone-landed ?drone)
+            (decrease (battery-level ?drone) 1)
+
         )
     )
 
@@ -102,6 +112,8 @@
         :effect (and
             (drone-is-flying ?drone)
             (not (drone-landed ?drone))
+            (decrease (battery-level ?drone) 3)
+
         )
     )
 )

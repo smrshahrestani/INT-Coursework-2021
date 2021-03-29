@@ -4,18 +4,18 @@
     (:types
         location parcel storm drone ; our types
     )
-    
+
     ;fluents
     (:functions
         (battery-level ?b - drone)
-        (distance-between ?l1 - location ?l2 - location)
+        ;(distance-between ?l1 - location ?l2 - location)
         
     )
 
     (:predicates
         ;(drone-at ?a - location)
         (drone-at ?a - drone ?b - location) ;the drone is in a location
-        (storm-at ?b - location) ;the storm is in a location
+         (storm-at ?b - location) ;the storm is in a location
         (clear-skies ?b - location) ;no storm is in a location
         (at ?d - parcel ?b - location) ;the parcel is in a location
         (has-parcel ?d - parcel ?a - drone) ; the parcel is on a drone

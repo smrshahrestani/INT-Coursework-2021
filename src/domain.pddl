@@ -30,6 +30,7 @@
     (:action change_location
         :parameters (?droneinit - drone ?locationinit - location ?locationfinal - location )
         :precondition (and
+            (>= (battery-level ?droneinit) 1)
             (drone-is-flying ?droneinit)
             (drone-at ?droneinit ?locationinit)
             (clear-skies ?locationfinal)

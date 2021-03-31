@@ -8,7 +8,7 @@
     ;fluents
     (:functions
         (battery-level ?b - drone)
-        ;(distance-between ?l1 - location ?l2 - location)
+        (battery-needed-to-travel ?l1 - location ?l2 - location)
         
     )
 

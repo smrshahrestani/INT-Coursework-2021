@@ -60,4 +60,5 @@
             (drone-at drone_c location_a)
         )
     )
+    (:metric minimize (total_battery_used))
 )

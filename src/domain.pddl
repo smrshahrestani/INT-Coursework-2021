@@ -8,7 +8,8 @@
     ;fluents
     (:functions
         (battery-level ?b - drone)
-        ;(distance-between ?l1 - location ?l2 - location)
+        (battery-needed ?l1 ?l2 - location)
+        (total-battery-used)
         
     )
 
@@ -33,11 +34,13 @@
             (drone-is-flying ?droneinit)
             (drone-at ?droneinit ?locationinit)
             (clear-skies ?locationfinal)
+            (>= (battery-level ?droneinit) (battery-needed ?locationinit ?locationfinal))
         )
         :effect (and
             (drone-at ?droneinit ?locationfinal)
             (not (drone-at ?droneinit ?locationinit))
-            (decrease (battery-level ?droneinit) 1)
+            (decrease (battery-level ?droneinit) (battery-needed ?locationinit ?locationfinal))
+            (increase (total-battery-used) (battery-needed ?l1 ?l2))
         )
     )
 
@@ -47,11 +50,13 @@
             (can-land ?l)
             (drone-is-flying ?drone)
             (drone-at ?drone ?l)
+            (>= (battery-level ?drone) 1)
         )
         :effect (and 
             (not (drone-is-flying ?drone))
             (drone-landed ?drone)
             (decrease (battery-level ?drone) 1)
+            (increase (total-battery-used) 1)
 
         )
     )
@@ -108,11 +113,13 @@
         :precondition (and
             (drone-at ?drone ?l)
             (drone-landed ?drone)
+            (>= (battery-level ?drone) 3)
         )
         :effect (and
             (drone-is-flying ?drone)
             (not (drone-landed ?drone))
             (decrease (battery-level ?drone) 3)
+            (increase (total-battery-used) 3)
 
         )
     )

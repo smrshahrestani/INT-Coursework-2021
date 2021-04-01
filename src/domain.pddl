@@ -8,7 +8,6 @@
     ;fluents
     (:functions
         (battery-level ?b - drone)
- fluents
         (battery-needed ?l1 ?l2 - location)
         (total-battery-used)
 

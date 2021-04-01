@@ -8,8 +8,10 @@
     ;fluents
     (:functions
         (battery-level ?b - drone)
+ fluents
         (battery-needed ?l1 ?l2 - location)
         (total-battery-used)
+
         
     )
 
@@ -31,6 +33,7 @@
     (:action change_location
         :parameters (?droneinit - drone ?locationinit - location ?locationfinal - location )
         :precondition (and
+            (>= (battery-level ?droneinit) 1)
             (drone-is-flying ?droneinit)
             (drone-at ?droneinit ?locationinit)
             (clear-skies ?locationfinal)

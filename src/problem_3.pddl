@@ -39,7 +39,7 @@
         (drone-empty drone_b)
         (drone-empty drone_c)
 
-        ;battery level of drones
+        ;battery level of droness
         (= (battery-level drone_a) 100) (= (battery-level drone_b) 100) (= (battery-level drone_c) 100)
 
         ;battery needed for travel

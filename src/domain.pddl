@@ -42,7 +42,7 @@
             (drone-at ?droneinit ?locationfinal)
             (not (drone-at ?droneinit ?locationinit))
             (decrease (battery-level ?droneinit) (battery-needed ?locationinit ?locationfinal))
-            (increase (total-battery-used) (battery-needed ?l1 ?l2))
+            (increase (total-battery-used) (battery-needed ?locationinit ?locationfinal))
         )
     )
 

@@ -1,6 +1,6 @@
 (define
     (domain dronedelivery)
-    (:requirements :strips :typing :fluents) ;:negative-preconditions)
+    (:requirements :strips :typing :fluents) ;:negative-preconditions :probabilistic-effects)
     (:types
         location parcel storm drone ; our types
     )

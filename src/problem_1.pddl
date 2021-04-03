@@ -11,10 +11,10 @@
     (:init
         
         ; 
-        (probabilistic 0.9 (clear-skies location_a))
-        (probabilistic 0.9 (clear-skies location_b))
-        (probabilistic 0.9 (clear-skies location c))
-        (probabilistic 0.9 (clear-skies location_d))
+        (clear-skies location_a)
+        (clear-skies location_b)
+        (clear-skies location_c)
+        (clear-skies location_d)
         
 
         (at parcel_a location_a)
@@ -45,6 +45,8 @@
         (drone-empty drone_a)
         (drone-empty drone_b)
         (drone-empty drone_c)
+
+        
 
 
     )

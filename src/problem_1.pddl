@@ -10,12 +10,12 @@
     )
     (:init
         
-        ;
-        (clear-skies location_a)
-        (clear-skies location_b)
-        (clear-skies location_c)
-        (clear-skies location_d)
-
+        ; 
+        (probabilistic 0.9 (clear-skies location_a))
+        (probabilistic 0.9 (clear-skies location_b))
+        (probabilistic 0.9 (clear-skies location c))
+        (probabilistic 0.9 (clear-skies location_d))
+        
 
         (at parcel_a location_a)
         (at parcel_b location_a)

@@ -1,6 +1,6 @@
-;models situation with insufficient battery
+;models situation with just enough battery battery
 (define   
-    (problem low_battery)
+    (problem fuel_efficient)
     (:domain dronedelivery)
 
     (:objects 
@@ -42,8 +42,8 @@
 
         ;battery level of droness
         (= (battery-level drone_a) 30) 
-        (= (battery-level drone_b) 30) 
-        (= (battery-level drone_c) 30)
+        (= (battery-level drone_b) 50) 
+        (= (battery-level drone_c) 40)
 
         ;battery needed for travel
         (= (battery-needed location_a location_b) 10) 

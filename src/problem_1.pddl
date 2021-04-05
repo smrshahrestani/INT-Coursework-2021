@@ -1,7 +1,8 @@
-(define
-    (problem no_storm)
+;models normal delivery with good weather conditions and lots of battery
+(define   
+    (problem no_storm_enough_battery)
     (:domain dronedelivery)
-    ;(:situation <situation_name>) ;deprecated
+    
     (:objects 
         drone_a drone_b drone_c - drone 
         location_a location_b location_c location_d - location
@@ -10,12 +11,12 @@
     )
     (:init
         
-        ; 
+        
         (clear-skies location_a)
         (clear-skies location_b)
         (clear-skies location_c)
         (clear-skies location_d)
-        
+
 
         (at parcel_a location_a)
         (at parcel_b location_a)
@@ -26,17 +27,10 @@
         (belongs-to parcel_c location_d)
 
 
-        ; (on parcel_a drone_a)
-        ; (on parcel_b drone_b)
-        ; (on parcel_c drone_c)
-
         (drone-at drone_a location_a)
         (drone-at drone_b location_a)
         (drone-at drone_c location_a)
 
-        ; (has-parcel drone_a parcel_a)
-        ; (has-parcel drone_b parcel_b)
-        ; (has-parcel drone_c parcel_c)
         
         (drone-landed drone_a)
         (drone-landed drone_b)
@@ -46,7 +40,29 @@
         (drone-empty drone_b)
         (drone-empty drone_c)
 
-        
+        ;battery level of droness
+        (= (battery-level drone_a) 100) 
+        (= (battery-level drone_b) 100) 
+        (= (battery-level drone_c) 100)
+
+        ;battery needed for travel
+        (= (battery-needed location_a location_b) 10) 
+        (= (battery-needed location_a location_c) 20) 
+        (= (battery-needed location_a location_d) 15)
+        (= (battery-needed location_b location_a) 10)
+        (= (battery-needed location_b location_c) 10) 
+        (= (battery-needed location_b location_d) 8)
+        (= (battery-needed location_c location_a) 20)
+        (= (battery-needed location_c location_b) 10) 
+        (= (battery-needed location_c location_d) 12)
+        (= (battery-needed location_d location_a) 15)
+        (= (battery-needed location_d location_b) 8) 
+        (= (battery-needed location_d location_c) 12)
+        ;init total battery used
+        (= (total-battery-used drone_a) 0) 
+        (= (total-battery-used drone_b) 0) 
+        (= (total-battery-used drone_c) 0)
+
 
 
     )
@@ -59,4 +75,5 @@
             (drone-at drone_c location_a)
         )
     )
+    (:metric minimize (total-battery-used))
 )

@@ -40,13 +40,27 @@
         (drone-empty drone_c)
 
         ;battery level of droness
-        (= (battery-level drone_a) 100) (= (battery-level drone_b) 100) (= (battery-level drone_c) 100)
+        (= (battery-level drone_a) 100) 
+        (= (battery-level drone_b) 100) 
+        (= (battery-level drone_c) 100)
 
         ;battery needed for travel
-        (= (battery-needed location_a location_b) 10) (= (battery-needed location_a location_c) 20) (= (battery-needed location_a location_d) 15)
-        (= (battery-needed location_b location_a) 10) (= (battery-needed location_b location_c) 10) (= (battery-needed location_b location_d) 8)
-        (= (battery-needed location_c location_a) 20) (= (battery-needed location_c location_b) 10) (= (battery-needed location_c location_d) 12)
-        (= (battery-needed location_d location_a) 15)(= (battery-needed location_d location_b) 8) (= (battery-needed location_d location_c) 12)
+        (= (battery-needed location_a location_b) 10) 
+        (= (battery-needed location_a location_c) 20) 
+        (= (battery-needed location_a location_d) 15)
+        (= (battery-needed location_b location_a) 10)
+        (= (battery-needed location_b location_c) 10) 
+        (= (battery-needed location_b location_d) 8)
+        (= (battery-needed location_c location_a) 20)
+        (= (battery-needed location_c location_b) 10) 
+        (= (battery-needed location_c location_d) 12)
+        (= (battery-needed location_d location_a) 15)
+        (= (battery-needed location_d location_b) 8) 
+        (= (battery-needed location_d location_c) 12)
+        ;init total battery used
+        (= (total-battery-used drone_a) 0) 
+        (= (total-battery-used drone_b) 0) 
+        (= (total-battery-used drone_c) 0)
 
 
 
@@ -60,5 +74,5 @@
             (drone-at drone_c location_a)
         )
     )
-    (:metric minimize (total_battery_used))
+    (:metric minimize (total-battery-used))
 )

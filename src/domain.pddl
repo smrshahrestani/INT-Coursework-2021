@@ -9,7 +9,7 @@
     (:functions
         (battery-level ?b - drone)
         (battery-needed ?l1 ?l2 - location)
-        (total-battery-used)
+        (total-battery-used ?b - drone)
 
         
     )
@@ -42,7 +42,7 @@
             (drone-at ?droneinit ?locationfinal)
             (not (drone-at ?droneinit ?locationinit))
             (decrease (battery-level ?droneinit) (battery-needed ?locationinit ?locationfinal))
-            (increase (total-battery-used) (battery-needed ?locationinit ?locationfinal))
+            (increase (total-battery-used ?droneinit) (battery-needed ?locationinit ?locationfinal))
         )
     )
 
@@ -58,7 +58,7 @@
             (not (drone-is-flying ?drone))
             (drone-landed ?drone)
             (decrease (battery-level ?drone) 1)
-            (increase (total-battery-used) 1)
+            (increase (total-battery-used ?drone) 1)
 
         )
     )
@@ -121,7 +121,7 @@
             (drone-is-flying ?drone)
             (not (drone-landed ?drone))
             (decrease (battery-level ?drone) 3)
-            (increase (total-battery-used) 3)
+            (increase (total-battery-used ?drone) 3)
 
         )
     )

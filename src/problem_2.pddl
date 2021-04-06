@@ -12,10 +12,10 @@
     (:init
         
         
-        (storm-at location_a)
+        (storm-at location_d)
         (clear-skies location_b)
         (clear-skies location_c)
-        (clear-skies location_d)
+        (clear-skies location_a)
 
 
         (at parcel_a location_a)

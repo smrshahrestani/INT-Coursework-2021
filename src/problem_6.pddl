@@ -54,9 +54,7 @@
         (= (battery-needed location_d location_b) 8) 
         (= (battery-needed location_d location_c) 12)
         ;init total battery used
-        (= (total-battery-used drone_a) 0) 
-        (= (total-battery-used drone_b) 0) 
-        (= (total-battery-used drone_c) 0)
+        (= (total-battery-used drone_a) 0)
 
 
 
@@ -66,8 +64,6 @@
             (at parcel_b location_c)
             (at parcel_c location_a)
             (drone-at drone_a location_a)
-            (drone-at drone_b location_a)
-            (drone-at drone_c location_a)
         )
     )
     (:metric minimize (total-battery-used))

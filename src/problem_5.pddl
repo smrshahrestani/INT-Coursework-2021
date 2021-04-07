@@ -12,7 +12,7 @@
     (:init
         (can-land location_a)
         (can-land location_b)
-        (can-land location_c)
+        ;(can-land location_c)
         (can-land location_c)
 
         (clear-skies location_a)

@@ -4,7 +4,7 @@
     (:domain dronedelivery)
 
     (:objects 
-        drone_a 
+        drone_a - drone
         location_a location_b location_c location_d - location
         parcel_a parcel_b parcel_c - parcel
         storm_a - storm

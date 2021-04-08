@@ -36,6 +36,7 @@
             (drone-is-flying ?droneinit)
             (drone-at ?droneinit ?locationinit)
             (clear-skies ?locationfinal)
+            (clear-skies ?locationinit)
             (>= (battery-level ?droneinit) (battery-needed ?locationinit ?locationfinal))
         )
         :effect (and

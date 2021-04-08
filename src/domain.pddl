@@ -116,6 +116,7 @@
         :precondition (and
             (drone-at ?drone ?l)
             (drone-landed ?drone)
+            (clear-skies ?l)
             (>= (battery-level ?drone) 3)
         )
         :effect (and

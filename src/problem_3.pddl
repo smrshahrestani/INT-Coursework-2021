@@ -41,7 +41,7 @@
         (drone-empty drone_c)
 
         ;battery level of droness
-        (= (battery-level drone_a) 30) 
+        (= (battery-level drone_a) 10) 
         (= (battery-level drone_b) 30) 
         (= (battery-level drone_c) 30)
 
@@ -75,5 +75,4 @@
             (drone-at drone_c location_a)
         )
     )
-    (:metric minimize (total-battery-used))
 )
